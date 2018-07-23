@@ -8,7 +8,7 @@ import (
 func main() {
     dani := flag.Int("dani", 100, "Dani laptopjanak toltottsegi szintje")
     gellert := flag.Int("gellert", 100, "Gellert laptopjanak toltottsegi szintje")
-    gergo := flag.Int("gellert", 100, "Gergo laptopjanak toltottsegi szintje")
+    gergo := flag.Int("gergo", 100, "Gergo laptopjanak toltottsegi szintje")
 
 
     flag.Parse()
