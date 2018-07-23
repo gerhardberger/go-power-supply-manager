@@ -14,9 +14,9 @@ func main() {
     flag.Parse()
     
     switch {
-        *dani < *gellert && *dani < *gergo:
+        case *dani < *gellert && *dani < *gergo:
             fmt.Println("Dani laptopjat kell tolteni")
-        *gellert < *dani && *gellert < *gergo:
+        case *gellert < *dani && *gellert < *gergo:
             fmt.Println("Gellert laptopjat kell tolteni")
         default:
             fmt.Println("Geri laptopjat kell tolteni")     
