@@ -1,24 +1,38 @@
 package main
 
 import (
-    "fmt"
-    "flag"
+	"flag"
+	"fmt"
 )
 
+// Person struct for name and battery
+type Person struct {
+	name    string
+	battery *int
+}
+
 func main() {
-    dani := flag.Int("dani", 100, "Dani laptopjanak toltottsegi szintje")
-    gellert := flag.Int("gellert", 100, "Gellert laptopjanak toltottsegi szintje")
-    gergo := flag.Int("gergo", 100, "Gergo laptopjanak toltottsegi szintje")
+	names := []string{"dani", "gellert", "gergo"}
 
+	var people []Person
+	for _, p := range names {
+		people = append(people, Person{p, flag.Int(p, 100, fmt.Sprintf("%s laptopjanak toltottsegi szintje", p))})
+	}
 
-    flag.Parse()
-    
-    switch {
-        case *dani < *gellert && *dani < *gergo:
-            fmt.Println("Dani laptopjat kell tolteni")
-        case *gellert < *dani && *gellert < *gergo:
-            fmt.Println("Gellert laptopjat kell tolteni")
-        default:
-            fmt.Println("Geri laptopjat kell tolteni")     
-    }
+	flag.Parse()
+
+	selectedPerson := personWithLowestBattery(people)
+	fmt.Printf("%s laptopjat kell tolteni\n", selectedPerson.name)
+}
+
+func personWithLowestBattery(people []Person) Person {
+	minBattery := 100
+	selectedPerson := people[0]
+	for _, person := range people {
+		if *person.battery < minBattery {
+			minBattery = *person.battery
+			selectedPerson = person
+		}
+	}
+	return selectedPerson
 }
